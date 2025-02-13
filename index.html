@@ -1,165 +1,151 @@
 <!DOCTYPE html>
-<html lang="en" class="">
-  <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta charset="utf-8">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>UWL Simulated Placement - Actor Handbook</title>
 
-    <title>Simulated Placement - Actor Handbook</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="robots" content="noindex, nofollow">
 
-    <link type="text/css" rel="stylesheet" href="lib/icomoon.css">
-    <script type="text/javascript" src="lib/player-0.0.11.min.js"></script>
-    <script type="text/javascript" src="lib/lzwcompress.js"></script>
-
-    <!-- Resize Hack -->
-    <script type="text/javascript">
-      window.resizeTo(screen.width, screen.height);
-    </script>
-    
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
-    <script id="__ENTRY__" type="application/json">
-      {".js":["rise/8188f627.js"]}
-    </script>
-
-    <script id="__REMOTE_ENTRIES__" type="application/json">
-      {"mondrian":{".js":["mondrian/entry.js"]}}
-    </script>
-
-    <script>
-      (function() {
-        const jsonp = {}
-
-        function loadModule(manifest) {
-          const p = []
-
-          if (manifest['.css'] != null) {
-            for (var idx = 0; idx < manifest['.css'].length; idx++) {
-              p.push(new Promise((resolve, reject) => {
-                var link = document.createElement('link')
-                link.onload = resolve
-                link.onerror = reject
-                link.rel = 'stylesheet'
-                link.href = 'lib/' + manifest['.css'][idx]
-                document.body.appendChild(link)
-              }))
+        <style>
+            *,
+            *:after,
+            *:before {
+                box-sizing: border-box;
             }
-          }
-
-          if (manifest['.js'] != null) {
-            for (var idx = 0; idx < manifest['.js'].length; idx++) {
-              p.push(new Promise((resolve, reject) => {
-                var script = document.createElement('script')
-                script.onload = resolve
-                script.onerror = reject
-                script.src = 'lib/' + manifest['.js'][idx]
-                document.body.appendChild(script)
-              }))
+            body,
+            html {
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+                font-weight: 300;
+                font-size: 16px;
+                background: #f2f2f2;
+                color: #2D3737;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                min-height: 100%;
             }
-          }
 
-          return Promise.all(p)
-        }
+            .protected {
+                background: #fff;
+                -webkit-box-shadow: 0 2px 3px 0 rgba(0,0,0,0.1);
+                box-shadow: 0 2px 3px 0 rgba(0,0,0,0.1);
+                border-radius: 3px;
+                min-width: 500px;
+                text-align: center;
+            }
+            .protected__content {
+                padding: 24px 28px;
+            }
+            .protected__content__heading {
+                font-size: 16px;
+                font-weight: 500;
+                margin: 0 0 12px;
+                line-height: 1;
+            }
+            .protected__alert {
+                display: none;
+                border-bottom: 1px solid transparent;
+                border-radius: 3px 3px 0 0;
+                padding: 12px 14px;
+                color: #a94442;
+                background-color: #f2dede;
+                border-color: #ebccd1;
+            }
+            .protected__content__input {
+                display: block;
+                border: solid 1px #ccc;
+                padding: 12px 14px;
+                -webkit-box-shadow: 0 2px 3px 0 rgba(0,0,0,0.1);
+                box-shadow: 0 2px 3px 0 rgba(0,0,0,0.1);
+                font-size: 16px;
+                width: 100%;
+                border-radius: 3px;
 
-        function deserialize(str) {
-          const buffer = Uint8Array.from(atob(str), c => c.charCodeAt(0))
-          const json = new TextDecoder().decode(buffer)
-          const result = JSON.parse(json)
-          return result
-        }
+                margin-bottom: 12px;
+            }
+            .protected__content__input:focus {
+                outline: none;
+                border-color: #228843;
+            }
+            .protected__content__btn {
+                background-color: #228843;
+                border-radius: 3px;
+                cursor: pointer;
+                border: none;
+                color: #fff;
+                padding: 12px 14px;
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+                font-weight: 500;
+                font-size: 16px;
 
-        function __loadEntry() {
-          return loadModule(JSON.parse(document.getElementById('__ENTRY__').textContent))
-        }
+            }
+            .protected__content__btn:hover {
+                background-color: #1C6D36;
+            }
+            .protected__content__logo {
+                margin-bottom: 20px;
+            }
 
-        function __loadRemoteEntry(name) {
-          const manifest = JSON.parse(document.getElementById('__REMOTE_ENTRIES__').textContent)
-          if (manifest[name] == null) throw new Error(`Missing manifest for remote entry "${name}".`)
-          return loadModule(manifest[name])
-        }
-        
-        async function __loadJsonp(id, path) {
-          try {
-            return await new Promise((resolve, reject) => {
-              try {
-                jsonp[id] = resolve
-                const script = document.createElement('script')
-                script.onerror = reject
-                script.src = `./${path}`
-                document.head.appendChild(script)
-              } catch (err) {
-                reject(err)
-              }
+        </style>
+
+    </head>
+
+    <body>
+
+        <div class="protected">
+            <div class="protected__alert" data-id="alert">You entered the wrong password</div>
+            <div class="protected__content">
+                <div class="protected__content__logo">
+                    <img src="logo.png" alt="Logo" style="width: 70px">
+                </div>
+                <h1 class="protected__content__heading">Please enter the provided password to continue.</h1>
+                <input class="protected__content__input" data-id="password" type="password" placeholder="Enter Password Here..."/>
+                <button data-id="button" type="button" class="protected__content__btn">Continue</button>
+            </div>
+        </div>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/js-sha1/0.6.0/sha1.min.js"></script>
+        <script type="text/javascript">
+            "use strict"
+            var button = document.querySelectorAll('[data-id="button"]')
+            var password = document.querySelectorAll('[data-id="password"]')
+
+            function login(secret) {
+                var hash = sha1(secret)
+                var url = hash + "/index.html"
+                var alert = document.querySelectorAll('[data-id="alert"]')
+
+                var request = new XMLHttpRequest()
+                request.open('GET', url, true)
+
+                request.onload = function () {
+                    if (request.status >= 200 && request.status < 400) {
+                        window.location = url
+                    } else {
+                        parent.location.hash = hash
+                        alert[0].style.display = 'block'
+                        password[0].setAttribute('placeholder', 'Incorrect password')
+                        password[0].value = ''
+                    }
+                }
+                request.onerror = function () {
+                    parent.location.hash = hash
+                    alert[0].style.display = 'block'
+                    password[0].setAttribute('placeholder', 'Incorrect password')
+                    password[0].value = ''
+                }
+                request.send()
+            }
+
+            button[0].addEventListener("click", function () {
+                login(password[0].value)
             })
-          } finally {
-            delete jsonp[id]
-          }
-        }
 
-        function __resolveJsonp(id, data) {
-          const resolve = jsonp[id]
-          if (typeof resolve !== 'function') {
-            throw new Error(`Could not load JSONP "${id}"`)
-          }
-          resolve(data)
-        }
-
-        async function __fetchCourse(name) {
-          name = name == null ? window.i18n.default : name
-          if (!window.i18n.available.includes(name)) {
-            console.warn(`Could not load locale "${name}"`)
-            name = window.i18n.available[0]
-          }
-          const encoded = await __loadJsonp(`course:${name}`, `locales/${name}.js`)
-          const courseData = deserialize(encoded)
-          return courseData
-        }
-
-        window.__loadEntry = __loadEntry
-        window.__loadRemoteEntry = __loadRemoteEntry
-        window.__loadJsonp = __loadJsonp
-        window.__resolveJsonp = __resolveJsonp
-        window.__fetchCourse = __fetchCourse
-      })()
-    </script>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="text/javascript">
-  (function(root) {
-    window.i18n = {"available":["und"],"default":"und"};
-    window.partnerContent = [];
-
-    function isExport() {
-      return true;
-    }
-
-    function resolvePath(path) {
-      return ('assets/').concat(path);
-    }
-
-    function resolveFontPath(font) {
-      return ('lib/fonts/').concat(font.key.split('/').reverse()[0]);
-    }
-
-    function fetchAvailableLocales() {
-      return window.i18n
-    }
-
-    root.Runtime = {
-      fetch: window.__fetchCourse,
-      fetchAvailableLocales: fetchAvailableLocales,
-      isExport: isExport,
-      resolvePath: resolvePath,
-      resolveFontPath: resolveFontPath
-    };
-  }(window));
-</script>
-
-    
-    <script>__loadEntry()</script>
-    
-  </body>
+            document.onkeydown = function (e) {
+                e = e || window.event
+                if (e.keyCode == 13) {
+                    login(password[0].value)
+                }
+            }
+        </script>
+    </body>
 </html>
